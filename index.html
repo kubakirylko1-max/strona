@@ -1,196 +1,104 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Twoje słowa — Twój ślad</title>
-  <meta name="description" content="Twoje słowa zostawiają ślad. Strona o odpowiedzialności i szacunku w komunikacji." />
   <style>
-    :root{
-      --bg:#fbfbfc; --card:#ffffff; --muted:#6b7280; --accent:#0b67ff;
-      --radius:12px; --glass: rgba(255,255,255,0.6);
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0; background:linear-gradient(180deg,#f6f8ff 0%,#fbfbfc 100%);
-      color:#0f1724; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-      line-height:1.5; padding:32px;
-      display:flex; justify-content:center;
-    }
-    .wrap{max-width:900px; width:100%;}
-    header{
-      display:flex; gap:16px; align-items:center; margin-bottom:18px;
-    }
-    .logo{
-      width:72px; height:72px; border-radius:14px; background:linear-gradient(135deg,#0b67ff,#6f9cff);
-      display:grid; place-items:center; color:white; font-weight:700; font-size:20px;
-      box-shadow:0 6px 18px rgba(11,103,255,0.18);
-    }
-    h1{margin:0; font-size:26px;}
-    p.lead{margin:6px 0 0; color:var(--muted);}
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
 
-    main{display:grid; gap:18px;}
-    .card{
-      background:var(--card); border-radius:var(--radius); padding:18px; box-shadow:0 6px 20px rgba(16,24,40,0.06);
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
     }
 
-    .cols{display:grid; grid-template-columns:1fr 320px; gap:18px;}
-    @media (max-width:820px){ .cols{grid-template-columns:1fr} .logo{width:56px;height:56px} }
-
-    h2{margin:0 0 8px;}
-    ul{margin:8px 0 0; padding-left:20px; color:var(--muted);}
-    li{margin-bottom:8px;}
-
-    .cta{
-      display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;
-    }
-    button{
-      background:var(--accent); color:white; border:0; padding:10px 14px; border-radius:10px;
-      cursor:pointer; font-weight:600;
-    }
-    .muted-btn{
-      background:transparent; border:1px solid #e6e9ef; color:#0f1724; padding:10px 12px; border-radius:10px;
+    body {
+      height: 100vh;
+      background: linear-gradient(120deg, #4facfe, #00f2fe);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+      animation: gradient 10s ease infinite alternate;
+      background-size: 200% 200%;
     }
 
-    footer{margin-top:14px; text-align:center; color:var(--muted); font-size:13px;}
-
-    .quote{
-      background:linear-gradient(90deg, rgba(11,103,255,0.06), rgba(111,156,255,0.03));
-      padding:12px; border-radius:10px; color:#0b2a66; font-style:italic;
-      border-left:4px solid rgba(11,103,255,0.12);
+    @keyframes gradient {
+      0% { background-position: left; }
+      100% { background-position: right; }
     }
 
-    .badge{display:inline-block; padding:6px 9px; background:#eef6ff; color:#0b67ff; border-radius:999px; font-weight:600; font-size:13px;}
-    .small{font-size:13px; color:var(--muted)}
-    .actions li{margin-bottom:6px}
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    p {
+      max-width: 700px;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.2);
+    }
+
+    .quote {
+      margin-top: 20px;
+      font-style: italic;
+      font-weight: 300;
+      color: #eaf6ff;
+      background: rgba(255,255,255,0.1);
+      padding: 10px 20px;
+      border-radius: 12px;
+      backdrop-filter: blur(6px);
+    }
+
+    .btn {
+      margin-top: 30px;
+      background: white;
+      color: #0077ff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #0077ff;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="logo">TS</div>
-      <div>
-        <h1>Twoje słowa — Twój ślad</h1>
-        <p class="lead">Komunikuj z odpowiedzialnością. Zostawaj z szacunkiem.</p>
-      </div>
-    </header>
+  <h1>Twoje słowa — Twój ślad</h1>
+  <p>
+    Każde słowo, które wypowiadasz, zostawia po sobie ślad.  
+    W internecie i w życiu codziennym warto pamiętać, że słowa mają moc —  
+    mogą budować albo ranić. Włącz odpowiedzialność i szacunek,  
+    zanim klikniesz „Wyślij”.
+  </p>
 
-    <main>
-      <section class="card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;">
-          <div>
-            <h2>O czym ta strona?</h2>
-            <p class="small">Krótko: wszystko, co mówisz lub piszesz, tworzy ślad — wpływa na innych i na Ciebie. Ta strona podpowiada, jak komunikować się odpowiedzialnie i z szacunkiem.</p>
-          </div>
-          <div style="text-align:right">
-            <span class="badge">Odpowiedzialność</span>
-            <div style="height:6px"></div>
-            <span class="badge" style="background:#fff2e8;color:#ff7a00;border:1px solid rgba(255,122,0,0.08)">Szacunek</span>
-          </div>
-        </div>
-
-        <hr style="margin:14px 0;border:0;border-top:1px solid #f0f2f5" />
-
-        <div class="quote">"Słowa mogą ranić — ale też leczyć. Wybieraj je tak, by zostawić ślad, z którego można być dumnym."</div>
-      </section>
-
-      <div class="cols">
-        <section class="card">
-          <h2>3 zasady odpowiedzialnej komunikacji</h2>
-          <ul>
-            <li><strong>Przemyśl zanim powiesz:</strong> zastanów się, jakie będą skutki Twoich słów — teraz i w przyszłości.</li>
-            <li><strong>Słuchaj aktywnie:</strong> daj innym przestrzeń, by wyrazili swoją perspektywę. Empatia zmniejsza konflikty.</li>
-            <li><strong>Szanuj, nawet gdy się nie zgadzasz:</strong> krytykuj zachowania, nie osoby; unikaj obraźliwych uogólnień.</li>
-          </ul>
-
-          <h2 style="margin-top:14px">Przykłady dobrych praktyk</h2>
-          <ul>
-            <li>Używaj komunikatów „ja” zamiast „ty” (np. „Czuję się...” zamiast „Zawsze robisz...”)</li>
-            <li>Sprawdzaj źródła zanim udostępnisz informację</li>
-            <li>Przyznaj się do błędu i przeproś — to buduje zaufanie.</li>
-          </ul>
-
-          <div class="cta">
-            <button onclick="copyText()">Kopiuj cytat</button>
-            <button class="muted-btn" onclick="toggleTheme()">Przełącz tryb</button>
-          </div>
-        </section>
-
-        <aside class="card" aria-label="Szybkie akcje">
-          <h2>Jak zostawić dobry ślad — checklist</h2>
-          <ul class="actions small">
-            <li>✅ Czy moje słowa są prawdziwe?</li>
-            <li>✅ Czy mogą komuś zaszkodzić?</li>
-            <li>✅ Czy jestem gotów wziąć odpowiedzialność za konsekwencje?</li>
-            <li>✅ Czy dałem drugiej stronie szansę odpowiedzieć?</li>
-          </ul>
-
-          <h2 style="margin-top:12px">Szybkie kroki</h2>
-          <ol class="small" style="padding-left:18px">
-            <li>Zatrzymaj się: policz do 5.</li>
-            <li>Zadaj sobie pytanie: czy to buduje, czy niszczy?</li>
-            <li>Jeśli to konieczne — odpisz później, kiedy emocje opadną.</li>
-          </ol>
-
-          <div style="margin-top:12px">
-            <button onclick="shareNote()">Udostępnij link</button>
-            <div id="shareMsg" class="small" style="margin-top:8px;color:var(--muted)"></div>
-          </div>
-        </aside>
-      </div>
-
-      <section class="card">
-        <h2>Dlaczego to ważne?</h2>
-        <p class="small">Słowa kształtują relacje, reputację i kulturę wokół nas. W erze internetu każdy wpis może trwać latami — dlatego odpowiedzialność to nie formalność, to inwestycja w lepsze relacje i bezpieczniejsze środowisko.</p>
-
-        <h2 style="margin-top:12px">Wezwanie do działania</h2>
-        <p class="small">Zacznij od małego kroku: następnym razem zanim napiszesz komentarz — przeczytaj go jeszcze raz i pomyśl, czy po 24 godzinach nadal byś go opublikował.</p>
-      </section>
-
-      <footer>
-        <div class="small">Stworzono jako krótka przypominajka: Twoje słowa zostawiają ślad — wybieraj odpowiedzialnie • © Twoje słowa</div>
-      </footer>
-    </main>
+  <div class="quote">
+    „Słowa mogą ranić — ale też leczyć. Wybieraj je tak, by zostawić ślad, z którego można być dumnym.”
   </div>
 
-  <script>
-    function copyText(){
-      const text = 'Słowa mogą ranić — ale też leczyć. Wybieraj je tak, by zostawić ślad, z którego można być dumnym.';
-      navigator.clipboard?.writeText(text).then(()=> {
-        alert('Cytat skopiowany do schowka!');
-      }).catch(()=> alert('Kopiowanie nie powiodło się — skopiuj ręcznie.'));
-    }
+  <button class="btn" onclick="alert('Dziękujemy, że wybierasz odpowiedzialność! ❤️')">Zostaw dobry ślad</button>
 
-    function toggleTheme(){
-      const dark = document.documentElement.style.getPropertyValue('--bg') === '#fbfbfc';
-      if(!dark){
-        document.documentElement.style.setProperty('--bg','#10121a');
-        document.body.style.background='linear-gradient(180deg,#0b1220 0%, #0f1724 100%)';
-        document.body.style.color='#e6eef8';
-      } else {
-        document.documentElement.style.setProperty('--bg','#fbfbfc');
-        document.body.style.background='linear-gradient(180deg,#f6f8ff 0%,#fbfbfc 100%)';
-        document.body.style.color='#0f1724';
-      }
-    }
-
-    function shareNote(){
-      const url = location.href;
-      if(navigator.share){
-        navigator.share({title: document.title, text: 'Twoje słowa — Twój ślad', url}).then(()=> {
-          document.getElementById('shareMsg').textContent = 'Udostępniono.';
-        }).catch(()=> {
-          document.getElementById('shareMsg').textContent = 'Udostępnianie przerwane.';
-        });
-      } else {
-        navigator.clipboard?.writeText(url).then(()=> {
-          document.getElementById('shareMsg').textContent = 'Link skopiowany do schowka — wklej go do wiadomości.';
-        }).catch(()=> {
-          document.getElementById('shareMsg').textContent = 'Skopiuj adres strony ręcznie.';
-        });
-      }
-    }
-  </script>
+  <footer>© 2025 Twoje słowa — Twój ślad</footer>
 </body>
 </html>
+
