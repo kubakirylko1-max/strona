@@ -29,28 +29,33 @@
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(-45deg, #74b9ff, #a29bfe, #81ecec, #ffeaa7);
-  background-size: 400% 400%;
-  animation: gradientMove 12s ease infinite;
+  background: url('tlo.jpg') no-repeat center center fixed; /* <- tu daj swoje zdjęcie */
+  background-size: cover;
   color: #222;
 }
 
-/* animacja tła */
-@keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* lekki cień i blur, żeby tekst był czytelny */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(6px);
+  background-color: rgba(255, 255, 255, 0.2);
+  z-index: -1;
 }
 
-/* efekt lekko przezroczystych kart */
-.card, .section, .container {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(12px);
+/* sekcje z efektem szkła */
+.section, .card, .container {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
   border-radius: 20px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.1);
   padding: 20px;
-  transition: 0.3s;
 }
+
 
     /* Layout */
     .wrap{max-width:var(--maxw); margin:28px auto; padding:20px}
@@ -604,4 +609,5 @@ body {
   </script>
 </body>
 </html>
+
 
