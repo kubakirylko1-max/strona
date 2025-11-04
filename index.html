@@ -1,581 +1,194 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Twoje słowa — Twój ślad</title>
-  <meta name="description" content="Twoje słowa zostawiają ślad. Naucz się komunikować z odpowiedzialnością i szacunkiem. Quiz, porady i interaktywne tło." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Twoje słowa – Twój ślad</title>
   <style>
-    :root{
-      --bg:#f7fafc;
-      --card:#ffffff;
-      --muted:#6b7280;
-      --accent:#2b7cff;
-      --accent-2:#6ec6ff;
-      --glass: rgba(255,255,255,0.7);
-      --radius:14px;
-      --shadow: 0 12px 30px rgba(17,24,39,0.07);
-      --maxw:1100px;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; background:var(--bg); color:#0b1220; -webkit-font-smoothing:antialiased;
-      line-height:1.45; -moz-osx-font-smoothing:grayscale;
-      -webkit-font-smoothing:antialiased;
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      overflow-x: hidden;
+      background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+      background-attachment: fixed;
+      background-size: 400% 400%;
+      animation: gradientMove 15s ease infinite;
     }
 
-    /* Layout */
-    .wrap{max-width:var(--maxw); margin:28px auto; padding:20px}
-    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
-    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
-    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;color:white;font-weight:800;font-size:20px;box-shadow:0 8px 22px rgba(43,124,255,0.16)}
-    .brand h1{font-size:16px;margin:0}
-    .brand p{margin:0;font-size:12px;color:var(--muted)}
-
-    nav{display:flex;gap:12px;align-items:center}
-    nav a{font-weight:600;color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:10px}
-    nav a:hover{color:var(--accent)}
-
-    .btn{background:var(--accent);color:white;border:0;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:700;box-shadow:0 8px 20px rgba(43,124,255,0.12)}
-    .ghost{background:transparent;border:1px solid rgba(11,23,40,0.06);padding:8px 12px;border-radius:10px;color:var(--muted);cursor:pointer}
-
-    /* HERO with parallax layers */
-    .hero {
-      position:relative;
-      overflow:visible;
-      border-radius:20px;
-      padding:48px 28px;
-      background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.98));
-      box-shadow:var(--shadow);
-      display:grid;
-      grid-template-columns: 1fr 420px;
-      gap:28px;
-      margin-bottom:20px;
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
-    @media (max-width:980px){ .hero{grid-template-columns:1fr;padding:36px} }
 
-    /* Parallax backgrounds - absolute layers */
-    .parallax-layer{
-      position:absolute; inset:0; border-radius:20px; pointer-events:none; z-index:0; overflow:hidden;
+    header {
+      text-align: center;
+      padding: 120px 20px 80px;
+      backdrop-filter: blur(10px);
     }
-    .parallax-img{
-      position:absolute; top:0; left:50%; transform:translateX(-50%); min-width:110%; height:140%; object-fit:cover; filter:brightness(.95) contrast(.98);
-      transition:transform .1s linear;
+
+    header h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      background: linear-gradient(45deg, #00c6ff, #0072ff);
+      -webkit-background-clip: text;
+      color: transparent;
     }
-    .overlay-shade{position:absolute; inset:0; background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.8)); mix-blend-mode:overlay; pointer-events:none}
 
-    .hero-content{position:relative; z-index:2}
+    header p {
+      font-size: 1.3rem;
+      color: #eee;
+    }
 
-    .tag{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(43,124,255,0.1);color:var(--accent);font-weight:700;font-size:13px;margin-bottom:12px}
-    .hero h2{font-size:30px;margin:0 0 12px;line-height:1.05}
-    .lead{color:var(--muted);margin-bottom:16px}
+    section {
+      max-width: 900px;
+      margin: 80px auto;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 40px;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 0 25px rgba(0,0,0,0.3);
+      transition: transform 0.4s;
+    }
 
-    .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
-    .stats{display:flex;gap:12px;margin-top:18px}
-    .stat{background:linear-gradient(180deg,#fff,#fbfdff);padding:10px 12px;border-radius:12px;min-width:110px;text-align:center;box-shadow:0 6px 18px rgba(11,103,255,0.04)}
-    .stat strong{display:block;font-size:18px}
+    section:hover {
+      transform: scale(1.02);
+    }
 
-    /* Right card */
-    .card{background:linear-gradient(180deg,#ffffff,#fbfdff);border-radius:14px;padding:16px;box-shadow:0 10px 28px rgba(16,24,40,0.05);z-index:2}
-    .preview-img{width:100%;height:160px;border-radius:10px;object-fit:cover;display:block}
+    h2 {
+      color: #00c6ff;
+      margin-bottom: 20px;
+    }
 
-    /* Sections */
-    section{margin-top:22px}
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    @media (max-width:980px){.grid-3{grid-template-columns:1fr}}
-    .feature{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow)}
-    .feature h3{margin:0 0 8px}
-    .muted{color:var(--muted)}
+    button {
+      background: linear-gradient(45deg, #00c6ff, #0072ff);
+      border: none;
+      color: white;
+      padding: 14px 26px;
+      font-size: 1.1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-    /* Smooth card group */
-    .info-band{display:flex;gap:18px;align-items:center;justify-content:space-between;padding:18px;border-radius:12px;background:linear-gradient(90deg,#eef8ff,#f7fbff);box-shadow:0 6px 20px rgba(11,103,255,0.04)}
+    button:hover {
+      transform: scale(1.05);
+      background: linear-gradient(45deg, #0072ff, #00c6ff);
+    }
 
-    /* Testimonials */
-    .testimonials{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    @media (max-width:980px){.testimonials{grid-template-columns:1fr}}
-    .tm{background:var(--card);padding:16px;border-radius:12px;box-shadow:var(--shadow)}
+    #quiz {
+      display: none;
+      margin-top: 30px;
+    }
 
-    /* Tabs & quiz */
-    .tabs{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
-    .tab-btn{background:transparent;border:0;padding:10px 14px;border-radius:999px;cursor:pointer;font-weight:700;color:var(--muted);transition:all .18s}
-    .tab-btn.active{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;box-shadow:0 8px 24px rgba(43,124,255,0.12)}
+    .question {
+      margin-bottom: 25px;
+    }
 
-    .panel{display:none;margin-top:12px}
-    .panel.active{display:block}
-    .quiz-box{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow)}
+    .question h3 {
+      margin-bottom: 10px;
+    }
 
-    .question{font-size:18px;margin-bottom:12px}
-    .options{display:grid;gap:10px}
-    .option{background:#fff;border-radius:10px;padding:12px;border:1px solid #eef5ff;cursor:pointer;font-weight:600}
-    .option:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(11,103,255,0.06)}
-    .option.correct{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;border:0}
-    .option.wrong{background:#fff1f0;border:1px solid #ffd6d0}
+    .answers label {
+      display: block;
+      margin: 5px 0;
+      cursor: pointer;
+    }
 
-    /* contact & footer */
-    form label{display:block;font-size:13px;margin-bottom:6px;color:var(--muted)}
-    input[type="text"],input[type="email"],textarea{width:100%;padding:12px;border-radius:10px;border:1px solid #edf4ff;margin-bottom:12px;font-size:15px}
-    textarea{min-height:120px;resize:vertical}
-    footer{text-align:center;color:var(--muted);padding:18px;margin-top:18px}
+    #result {
+      font-size: 1.4rem;
+      margin-top: 25px;
+      text-align: center;
+    }
 
-    /* reveal animation */
-    .reveal{opacity:0;transform:translateY(10px);transition:all .6s cubic-bezier(.2,.9,.3,1)}
-    .reveal.visible{opacity:1;transform:none}
+    footer {
+      text-align: center;
+      padding: 40px;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
+  <header>
+    <h1>Twoje słowa – Twój ślad</h1>
+    <p>Włącz odpowiedzialność i szacunek w sieci 🌍</p>
+  </header>
 
-    <header>
-      <a class="brand" href="#">
-        <div class="logo">TS</div>
-        <div>
-          <h1>Twoje słowa</h1>
-          <p>Twój ślad • Odpowiedzialność i szacunek</p>
-        </div>
-      </a>
+  <section>
+    <h2>Dlaczego słowa mają znaczenie?</h2>
+    <p>Każde słowo, które wypowiadasz lub publikujesz, zostawia po sobie ślad. W sieci nie da się ich cofnąć. Odpowiedzialność zaczyna się od chwili, gdy klikniesz „wyślij”.</p>
+    <p>Twoje słowa mogą kogoś zranić — ale też mogą wesprzeć, zmotywować i pomóc. Wybór należy do Ciebie.</p>
+  </section>
 
-      <nav>
-        <a href="#info" onclick="scrollToId('info')">Informacje</a>
-        <a href="#quizStart" onclick="openTab('quiz')">Quiz</a>
-        <a href="#kontakt" onclick="scrollToId('kontakt')">Kontakt</a>
-        <button class="btn" onclick="openTab('quiz')">Zrób quiz</button>
-      </nav>
-    </header>
+  <section>
+    <h2>Zrób quiz i sprawdź, jak radzisz sobie w sieci</h2>
+    <p>Dowiedz się, czy Twoje zachowanie online odzwierciedla odpowiedzialność i szacunek wobec innych.</p>
+    <button onclick="startQuiz()">Zrób quiz</button>
 
-    <!-- HERO (parallax layers) -->
-    <div class="hero" id="hero">
-      <div class="parallax-layer" id="layer1" aria-hidden="true">
-        <img class="parallax-img" src="https://images.unsplash.com/photo-1503602642458-232111445657?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=4e3c1c4f36e8bc0d3b7e2fba34a9f7f5" alt="" />
-        <div class="overlay-shade"></div>
-      </div>
+    <div id="quiz"></div>
+    <div id="result"></div>
+  </section>
 
-      <div class="hero-content">
-        <span class="tag">Włącz odpowiedzialność</span>
-        <h2>Twoje słowa — Twój ślad.<br><span style="color:var(--accent)">Mów z szacunkiem, działaj świadomie.</span></h2>
-        <p class="lead muted">Słowa zostawiają trwały ślad — w relacjach, w sieci, w pamięci. Naucz się komunikować tak, by budować, a nie niszczyć. Przejrzyj materiały i sprawdź się w quizie.</p>
-
-        <div class="hero-cta">
-          <button class="btn" onclick="openTab('quiz')">Rozpocznij quiz (15 pytań)</button>
-          <button class="ghost" onclick="scrollToId('info')">Dowiedz się więcej</button>
-        </div>
-
-        <div class="stats">
-          <div class="stat"><strong>15</strong><div style="font-size:13px;color:var(--muted)">pytań</div></div>
-          <div class="stat"><strong>5–10</strong><div style="font-size:13px;color:var(--muted)">min czasu</div></div>
-          <div class="stat"><strong>0 zł</strong><div style="font-size:13px;color:var(--muted)">dostęp</div></div>
-        </div>
-      </div>
-
-      <aside class="card" aria-hidden="true">
-        <div style="font-weight:700;margin-bottom:8px">Podgląd</div>
-        <img class="preview-img" src="https://images.unsplash.com/photo-1524253482453-3fed8d2fe12b?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=04f3d6e1c2e2e1b668a9db2a3b659c3d" alt="preview" />
-        <p style="margin-top:10px;color:var(--muted)">Przykład rewizji komentarza: zamiast "Głupi pomysł" — "Nie zgadzam się, bo...".</p>
-        <div style="margin-top:12px;display:flex;gap:8px">
-          <button class="btn" onclick="openTab('quiz')">Zacznij quiz</button>
-          <button class="ghost" onclick="downloadLeaflet()">Pobierz ulotkę</button>
-        </div>
-      </aside>
-    </div>
-
-    <!-- INFO -->
-    <section id="info" class="reveal">
-      <h2>Informacje i dobre praktyki</h2>
-      <p class="muted">Kilka praktycznych zasad by Twoje słowa były odpowiedzialne i pełne szacunku.</p>
-
-      <div class="grid-3" style="margin-top:14px">
-        <div class="feature">
-          <h3>Przemyśl zanim opublikujesz</h3>
-          <p class="muted">Odczekaj 5 minut — czasem to wystarczy, żeby emocje opadły i tekst wypowiedzi się poprawił.</p>
-        </div>
-        <div class="feature">
-          <h3>Słuchaj aktywnie</h3>
-          <p class="muted">Daj drugiej osobie przestrzeń. Zrozumienie zmniejsza napięcia i konflikt.</p>
-        </div>
-        <div class="feature">
-          <h3>Odpowiedzialność = zaufanie</h3>
-          <p class="muted">Przyznaj się do błędu i popraw zachowanie — to często wzmacnia relacje.</p>
-        </div>
-      </div>
-
-      <div class="info-band" style="margin-top:18px">
-        <div>
-          <div style="font-weight:700">Materiały do szkoły</div>
-          <div class="muted">Quiz możesz użyć jako mini testu na lekcji lub materiału do dyskusji.</div>
-        </div>
-        <div style="display:flex;gap:10px">
-          <button class="btn" onclick="downloadLeaflet()">Pobierz ulotkę</button>
-          <button class="ghost" onclick="sharePage()">Udostępnij stronę</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="reveal" style="margin-top:18px">
-      <h2>Co mówią inni</h2>
-      <div class="testimonials" style="margin-top:12px">
-        <div class="tm">
-          <div style="display:flex;gap:10px;align-items:center">
-            <div style="width:44px;height:44px;border-radius:8px;background:#e8f4ff;display:grid;place-items:center;color:var(--accent);font-weight:800">JD</div>
-            <div>
-              <div style="font-weight:700">Jan D., nauczyciel</div>
-              <div class="muted">Quiz idealny na lekcję — uczniowie chętnie rozmawiali po wynikach.</div>
-            </div>
-          </div>
-        </div>
-        <div class="tm">
-          <div style="display:flex;gap:10px;align-items:center">
-            <div style="width:44px;height:44px;border-radius:8px;background:#fff7ea;display:grid;place-items:center;color:#ff9b3c;font-weight:800">MK</div>
-            <div>
-              <div style="font-weight:700">Marta K., moderator</div>
-              <div class="muted">Mały, ale treściwy materiał — polecam do grup dyskusyjnych.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Tabs and Quiz -->
-    <section id="quizStart" class="reveal" style="margin-top:22px">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
-        <div>
-          <h2>Interaktywny quiz: Twoje słowa — Twój ślad</h2>
-          <div class="muted">15 pytań. Odpowiedzi informują, jak reagujesz i co warto poprawić.</div>
-        </div>
-        <div class="tabs" role="tablist" aria-label="Zakładki">
-          <button class="tab-btn active" data-tab="quiz" onclick="switchTab(event,'quiz')">Quiz</button>
-          <button class="tab-btn" data-tab="scenariusze" onclick="switchTab(event,'scenariusze')">Scenariusze</button>
-          <button class="tab-btn" data-tab="porady" onclick="switchTab(event,'porady')">Porady</button>
-        </div>
-      </div>
-
-      <!-- QUIZ PANEL -->
-      <div id="quiz" class="panel active">
-        <div class="quiz-box" id="quizBox">
-          <div id="quizIntro" class="center">
-            <p class="muted">Quiz zawiera 15 pytań — nie ma limitu czasu. Postaraj się wybierać szczerze.</p>
-            <button class="btn" onclick="startQuiz()">Rozpocznij quiz</button>
-          </div>
-
-          <div id="quizQuestion" style="display:none">
-            <div id="qmeta" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-              <div id="qnum" style="font-weight:700"></div>
-              <div id="qprogress" class="muted"></div>
-            </div>
-            <div class="question" id="qtext"></div>
-            <div class="options" id="options"></div>
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
-              <div id="qfeedback" class="muted"></div>
-              <div>
-                <button class="ghost" onclick="giveUp()">Poddaj się</button>
-                <button class="btn" id="nextBtn" style="display:none" onclick="nextQ()">Dalej</button>
-              </div>
-            </div>
-          </div>
-
-          <div id="quizEnd" style="display:none;text-align:center">
-            <h3 id="resultTitle"></h3>
-            <p id="resultText" class="muted"></p>
-            <div style="margin-top:12px;display:flex;gap:10px;justify-content:center">
-              <button class="btn" onclick="startQuiz()">Zagraj ponownie</button>
-              <button class="ghost" onclick="shareResult()">Udostępnij wynik</button>
-            </div>
-            <div id="resultAdvice" style="margin-top:12px;text-align:left"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Scenariusze -->
-      <div id="scenariusze" class="panel" style="display:none">
-        <div class="quiz-box">
-          <h3>Scenariusze — jak reagować (przykłady)</h3>
-          <ul class="muted" style="text-align:left">
-            <li><strong>Hejt w komentarzu:</strong> zgłoś, nie odpowiadaj agresją; jeśli chcesz pomóc — zaproponuj prywatną rozmowę.</li>
-            <li><strong>Fałszywa informacja:</strong> napisz źródło i korektę zamiast ośmieszać.</li>
-            <li><strong>Osoba w potrzebie:</strong> zaoferuj konkretne wsparcie i linki do pomocy.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Porady -->
-      <div id="porady" class="panel" style="display:none">
-        <div class="quiz-box">
-          <h3>Praktyczne porady</h3>
-          <ol class="muted" style="text-align:left">
-            <li>Używaj komunikatów „ja” (np. „Czuję, że...”).</li>
-            <li>Weryfikuj źródła zanim udostępnisz.</li>
-            <li>Włącz 2FA i ustaw prywatność kont.</li>
-            <li>Przyznaj błąd i napraw sytuację — to buduje zaufanie.</li>
-          </ol>
-        </div>
-      </div>
-    </section>
-
-    <!-- Kontakt -->
-    <section id="kontakt" class="reveal" style="margin-top:20px">
-      <h2>Kontakt / Pobierz materiał</h2>
-      <p class="muted">Masz pytania albo chcesz użyć tego materiału na lekcji? Napisz.</p>
-
-      <div style="display:grid;grid-template-columns:1fr 360px;gap:16px;margin-top:12px">
-        <div class="card">
-          <form id="contactForm" onsubmit="submitForm(event)">
-            <label for="name">Imię</label>
-            <input id="name" type="text" placeholder="Twoje imię" required>
-
-            <label for="email">E-mail</label>
-            <input id="email" type="email" placeholder="kontakt@domena.pl" required>
-
-            <label for="message">Wiadomość</label>
-            <textarea id="message" placeholder="Napisz wiadomość..." required></textarea>
-
-            <div style="display:flex;gap:10px;justify-content:flex-end">
-              <button type="submit" class="btn">Wyślij (symulacja)</button>
-              <button type="button" class="ghost" onclick="downloadLeaflet()">Pobierz ulotkę</button>
-            </div>
-            <div id="formMsg" style="margin-top:8px;color:var(--muted)"></div>
-          </form>
-        </div>
-
-        <aside class="card">
-          <div style="font-weight:700">Szybkie zasoby</div>
-          <ul class="muted" style="margin-top:10px;padding-left:18px">
-            <li>Lista kontrolna: prawda • szacunek • odpowiedzialność</li>
-            <li>Ulotka PDF / txt do druku</li>
-            <li>Poradnik krótkich reakcji — 3 kroki</li>
-          </ul>
-
-          <div style="margin-top:12px">
-            <div style="font-size:13px;color:var(--muted)">Kontakt</div>
-            <div style="font-weight:700">twojeslowo@example.com</div>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <footer class="reveal">
-      © 2025 Twoje słowa — Twój ślad • Stworzono z myślą o szacunku online
-    </footer>
-  </div>
+  <footer>
+    © 2025 Twoje słowa – Twój ślad | Projekt edukacyjny
+  </footer>
 
   <script>
-    /* ---------- Parallax (simple) ---------- */
-    (function(){
-      const layer = document.querySelector('#layer1 .parallax-img');
-      window.addEventListener('scroll', ()=> {
-        const scrolled = window.scrollY;
-        // subtle translate - slower than scroll for parallax
-        if(layer) layer.style.transform = `translate(-50%, ${scrolled * -0.12}px)`;
-      }, {passive:true});
-    })();
-
-    /* ---------- Reveal on scroll ---------- */
-    (function(){
-      const obs = new IntersectionObserver((entries)=>{
-        entries.forEach(e=>{
-          if(e.isIntersecting) e.target.classList.add('visible');
-        });
-      }, {threshold: 0.12});
-
-      document.querySelectorAll('.reveal').forEach(el=>{
-        obs.observe(el);
-      });
-    })();
-
-    /* ---------- Simple smooth scroll ---------- */
-    function scrollToId(id){
-      const el = document.getElementById(id);
-      if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
-    }
-
-    /* ---------- Tabs ---------- */
-    function switchTab(e, tab){
-      if(e) e.preventDefault();
-      document.querySelectorAll('.tab-btn').forEach(b=> b.classList.toggle('active', b.dataset.tab === tab));
-      document.querySelectorAll('.panel').forEach(p=> p.style.display = p.id === tab ? 'block' : 'none');
-      // scroll to panel
-      document.getElementById('quizStart').scrollIntoView({behavior:'smooth', block:'start'});
-    }
-
-    function openTab(tab){
-      switchTab(null, tab);
-    }
-
-    /* ---------- Share & leaflet ---------- */
-    function sharePage(){
-      const url = location.href;
-      if(navigator.share){
-        navigator.share({title:document.title,text:'Twoje słowa — Twój ślad',url}).catch(()=>alert('Udostępnianie przerwane'));
-      } else {
-        navigator.clipboard?.writeText(url).then(()=> alert('Link skopiowany do schowka'));
-      }
-    }
-
-    function downloadLeaflet(){
-      const content = "Twoje słowa — Twój ślad\n\nKilka zasad:\n- Przemyśl zanim opublikujesz\n- Szanuj innych\n- Weryfikuj źródła\n\nUżyj quizu jako materiału edukacyjnego.";
-      const blob = new Blob([content], {type:'text/plain'});
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = 'ulotka-twoje-slowo.txt';
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-    }
-
-    /* ---------- Contact form (simulated) ---------- */
-    function submitForm(e){
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const message = document.getElementById('message').value.trim();
-      const out = document.getElementById('formMsg');
-      if(!name||!email||!message){ out.textContent = 'Uzupełnij wszystkie pola.'; return; }
-      out.textContent = 'Wysłano (symulacja). Dzięki!';
-      setTimeout(()=>{ out.textContent = ''; document.getElementById('contactForm').reset(); }, 2200);
-    }
-
-    /* ---------- Quiz data (15 questions) ---------- */
-    const QUIZ = [
-      {q:"Kto najbardziej odpowiada za treści, które publikujesz?", a:["Tylko platforma","Ja — jako autor","Nikt"], good:1},
-      {q:"Zanim opublikujesz emocjonalny wpis, co warto zrobić?", a:["Opublikować natychmiast","Odczekać kilka minut","Skasować konto"], good:1},
-      {q:"Jak reagować na nieprawdziwą informację?", a:["Wyśmiewać autora","Podać źródła i poprawkę","Ignorować"], good:1},
-      {q:"Czy udostępnianie cudzych danych prywatnych jest w porządku?", a:["Tak, jeśli to zabawne","Nie — to naruszenie prywatności","Czasem"], good:1},
-      {q:"Gdy ktoś nie zgadza się z Tobą, jak odpowiesz najlepiej?", a:["Wyzywam","Argumentuję spokojnie","Ignoruję"], good:1},
-      {q:"Co zrobić, jeśli napisałeś coś krzywdzącego?", a:["Usunąć i udawać nic się nie stało","Przyznać się i przeprosić","Nic"], good:1},
-      {q:"Czy łatwo uwierzyć w sensacyjne nagłówki bez sprawdzania źródła?", a:["Tak","Nie","Czasami"], good:1},
-      {q:"Jak traktować komentarze osób, których nie znasz?", a:["Zakładać najgorsze","Słuchać i pytać","Odpowiadać agresywnie"], good:1},
-      {q:"Czy stosowanie komunikatów „ja” pomaga w dyskusji?", a:["Tak — zmniejsza konflikty","Nie ma znaczenia","Zwiększa konflikt"], good:0},
-      {q:"Jakie hasło jest bezpieczniejsze?", a:["123456","Długie i unikalne z 2FA","Twoje imię"], good:1},
-      {q:"Kiedy warto zgłosić treść moderatorom?", a:["Gdy to mowa nienawiści/zastraszanie","Gdy ktoś ma inne zdanie","Nigdy"], good:0},
-      {q:"Czy publiczne ośmieszanie kogoś to konstruktywna krytyka?", a:["Tak","Nie","Tylko czasem"], good:1},
-      {q:"Czy przed udostępnieniem warto zapytać siebie: 'Czy bym powiedział to w twarz?'", a:["Tak","Nie","Rzadko"], good:0},
-      {q:"Jak reagować na prośbę o pomoc w prywatnej wiadomości?", a:["Zignorować","Oferować wsparcie i zasoby","Ośmieszyć"], good:1},
-      {q:"Czy warto edukować innych na temat bezpiecznej komunikacji?", a:["Tak — wpływa na kulturę","Nie — to strata czasu","Tylko online"], good:0}
+    const quizData = [
+      { q: "Czy zanim coś napiszesz w internecie, zastanawiasz się, jak to odbiorą inni?", a: ["Zawsze", "Czasami", "Rzadko"], c: 0 },
+      { q: "Ktoś skomentował Twój post złośliwie. Co robisz?", a: ["Odpowiadam spokojnie", "Odpowiadam atakiem", "Ignoruję"], c: 0 },
+      { q: "Czy publikujesz zdjęcia innych bez ich zgody?", a: ["Nie", "Tylko bliskich", "Tak, jeśli są śmieszne"], c: 0 },
+      { q: "Czy zdarzyło Ci się udostępnić fake news?", a: ["Nigdy", "Nie wiem", "Tak"], c: 0 },
+      { q: "Czy używasz wulgaryzmów online?", a: ["Nigdy", "Czasem", "Często"], c: 0 },
+      { q: "Ktoś pisze coś krzywdzącego o innej osobie. Co robisz?", a: ["Reaguję", "Ignoruję", "Dołączam się"], c: 0 },
+      { q: "Czy Twoje słowa w sieci są takie same jak w realu?", a: ["Tak", "Nie zawsze", "Nie"], c: 0 },
+      { q: "Czy masz świadomość, że internet nie zapomina?", a: ["Tak", "Nie bardzo", "Nie"], c: 0 },
+      { q: "Czy publikujesz tylko sprawdzone informacje?", a: ["Tak", "Nie zawsze", "Nie"], c: 0 },
+      { q: "Czy wiesz, że słowa mogą mieć konsekwencje prawne?", a: ["Tak", "Nie", "Nie jestem pewien"], c: 0 },
+      { q: "Czy reagujesz, gdy widzisz hejt?", a: ["Tak", "Czasem", "Nie"], c: 0 },
+      { q: "Czy szanujesz prywatność innych w internecie?", a: ["Tak", "Nie zawsze", "Nie"], c: 0 },
+      { q: "Czy pomagasz innym, gdy widzisz cyberprzemoc?", a: ["Tak", "Nie wiem jak", "Nie"], c: 0 },
+      { q: "Czy masz świadomość, że Twoje posty tworzą Twój wizerunek?", a: ["Tak", "Trochę", "Nie"], c: 0 },
+      { q: "Czy uważasz, że słowa mogą ranić?", a: ["Tak", "Czasem", "Nie"], c: 0 }
     ];
 
-    let cur = 0, score = 0, answered = false;
-
-    function startQuiz(){
-      cur = 0; score = 0; answered = false;
-      document.getElementById('quizIntro').style.display = 'none';
-      document.getElementById('quizQuestion').style.display = 'block';
-      document.getElementById('quizEnd').style.display = 'none';
-      showQuestion();
-      window.scrollTo({top: document.getElementById('quizStart').offsetTop - 30, behavior:'smooth'});
-    }
-
-    function showQuestion(){
-      const q = QUIZ[cur];
-      document.getElementById('qnum').textContent = `Pytanie ${cur+1} z ${QUIZ.length}`;
-      document.getElementById('qprogress').textContent = `${Math.round((cur/QUIZ.length)*100)}%`;
-      document.getElementById('qtext').textContent = q.q;
-      const opts = document.getElementById('options');
-      opts.innerHTML = '';
-      q.a.forEach((opt,i)=>{
-        const btn = document.createElement('button');
-        btn.className = 'option';
-        btn.textContent = opt;
-        btn.onclick = ()=>selectOption(i, btn);
-        opts.appendChild(btn);
+    function startQuiz() {
+      const quizDiv = document.getElementById('quiz');
+      quizDiv.style.display = 'block';
+      quizDiv.innerHTML = '';
+      quizData.forEach((q, i) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        div.innerHTML = `<h3>${i + 1}. ${q.q}</h3>`;
+        const answers = document.createElement('div');
+        answers.className = 'answers';
+        q.a.forEach((opt, j) => {
+          const id = `q${i}_a${j}`;
+          answers.innerHTML += `<label><input type="radio" name="q${i}" value="${j}"> ${opt}</label>`;
+        });
+        div.appendChild(answers);
+        quizDiv.appendChild(div);
       });
-      document.getElementById('qfeedback').textContent = '';
-      document.getElementById('nextBtn').style.display = 'none';
-      answered = false;
+      quizDiv.innerHTML += `<button onclick="submitQuiz()">Zakończ quiz</button>`;
     }
 
-    function selectOption(i, btn){
-      if(answered) return;
-      answered = true;
-      const correct = QUIZ[cur].good;
-      // disable all
-      Array.from(document.getElementById('options').children).forEach(b=> b.disabled=true);
-      if(i === correct){
-        score++;
-        btn.classList.add('correct');
-        document.getElementById('qfeedback').textContent = 'Dobra odpowiedź — tak bym zrobił/a.';
-      } else {
-        btn.classList.add('wrong');
-        // highlight correct
-        const all = Array.from(document.getElementById('options').children);
-        if(all[correct]) all[correct].classList.add('correct');
-        document.getElementById('qfeedback').textContent = 'To nie najlepszy wybór — zobacz poradę poniżej.';
-      }
-      // show next
-      document.getElementById('nextBtn').style.display = 'inline-block';
+    function submitQuiz() {
+      const answers = document.querySelectorAll('input[type="radio"]:checked');
+      let score = 0;
+      answers.forEach((a, i) => {
+        if (parseInt(a.value) === quizData[i].c) score++;
+      });
+      const result = document.getElementById('result');
+      result.innerHTML = `<h3>Twój wynik: ${score} / 15</h3>` +
+      (score > 12 ? "Świetnie! Jesteś wzorem odpowiedzialności." :
+      score > 8 ? "Nieźle, ale możesz być jeszcze bardziej świadomy." :
+      "Zastanów się nad swoimi zachowaniami w sieci. Każde słowo zostawia ślad.");
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     }
-
-    function nextQ(){
-      cur++;
-      if(cur < QUIZ.length){
-        showQuestion();
-      } else {
-        finishQuiz();
-      }
-    }
-
-    function giveUp(){
-      finishQuiz(true);
-    }
-
-    function finishQuiz(abandoned=false){
-      document.getElementById('quizQuestion').style.display = 'none';
-      document.getElementById('quizIntro').style.display = 'none';
-      document.getElementById('quizEnd').style.display = 'block';
-      const title = document.getElementById('resultTitle');
-      const text = document.getElementById('resultText');
-      const advice = document.getElementById('resultAdvice');
-      if(abandoned){
-        title.textContent = 'Quiz przerwany';
-        text.textContent = 'Możesz spróbować ponownie, gdy będziesz gotowy.';
-        advice.innerHTML = '';
-        return;
-      }
-      title.textContent = `Twój wynik: ${score}/${QUIZ.length}`;
-      if(score === QUIZ.length){
-        text.textContent = 'Świetnie — masz bardzo wysoką świadomość odpowiedzialnej komunikacji!';
-      } else if(score >= Math.ceil(QUIZ.length*0.75)){
-        text.textContent = 'Bardzo dobrze — w większości wiesz jak reagować. Kilka rad poniżej.';
-      } else if(score >= Math.ceil(QUIZ.length*0.5)){
-        text.textContent = 'Dobrze — masz podstawy, warto przejrzeć sekcję porad.';
-      } else {
-        text.textContent = 'Warto poświęcić czas na porady i materiały. Komunikacja to umiejętność.';
-      }
-
-      // tailored advice (simple)
-      let adv = '<h4>Rady na start:</h4><ul>';
-      if(score < QUIZ.length) adv += '<li>Odczekaj 5 minut przed publikacją emocjonalnych treści.</li>';
-      if(score < 12) adv += '<li>Przed udostępnieniem sprawdź źródło i zastanów się nad skutkami.</li>';
-      if(score < 10) adv += '<li>Używaj komunikatów „ja” i staraj się pytać, nie oskarżać.</li>';
-      if(score >= 12) adv += '<li>Świetnie — dziel się wiedzą i zachęcaj innych do odpowiedzialności.</li>';
-      adv += '</ul>';
-      advice.innerHTML = adv;
-      // scroll to result
-      document.getElementById('quizEnd').scrollIntoView({behavior:'smooth'});
-    }
-
-    function shareResult(){
-      const txt = `Mój wynik w quizie "Twoje słowa — Twój ślad": ${score}/${QUIZ.length}. Sprawdź sam!`;
-      if(navigator.share){
-        navigator.share({title:document.title,text:txt,url:location.href});
-      } else {
-        navigator.clipboard?.writeText(txt + ' ' + location.href).then(()=> alert('Wynik skopiowany do schowka'));
-      }
-    }
-
-    /* Init: small effects */
-    document.addEventListener('DOMContentLoaded', ()=>{
-      // prepare parallax image movement also on load for position
-      const layerImg = document.querySelector('.parallax-img');
-      if(layerImg){
-        // tiny initial offset for aesthetics
-        layerImg.style.transform = 'translate(-50%, -30px)';
-      }
-
-      // reveal (manual add small delay)
-      setTimeout(()=> document.querySelectorAll('.reveal').forEach((el,i)=> setTimeout(()=> el.classList.add('visible'), i*90)), 250);
-    });
-
   </script>
 </body>
 </html>
