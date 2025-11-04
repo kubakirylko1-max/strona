@@ -26,6 +26,31 @@
       line-height:1.45; -moz-osx-font-smoothing:grayscale;
       -webkit-font-smoothing:antialiased;
     }
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(-45deg, #74b9ff, #a29bfe, #81ecec, #ffeaa7);
+  background-size: 400% 400%;
+  animation: gradientMove 12s ease infinite;
+  color: #222;
+}
+
+/* animacja tła */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* efekt lekko przezroczystych kart */
+.card, .section, .container {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  padding: 20px;
+  transition: 0.3s;
+}
 
     /* Layout */
     .wrap{max-width:var(--maxw); margin:28px auto; padding:20px}
@@ -579,3 +604,4 @@
   </script>
 </body>
 </html>
+
