@@ -3,102 +3,197 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Twoje słowa — Twój ślad</title>
+  <title>Nowoczesna Strona</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
-
-    * {
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #f8faff;
+      color: #1a1a1a;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
+      transition: all 0.3s ease;
     }
 
-    body {
-      height: 100vh;
-      background: linear-gradient(120deg, #4facfe, #00f2fe);
+    header {
+      background: linear-gradient(135deg, #4a90e2, #6fb1fc);
       color: white;
+      padding: 60px 20px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.2em;
+    }
+
+    nav {
+      background: white;
       display: flex;
       justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      text-align: center;
-      padding: 20px;
-      animation: gradient 10s ease infinite alternate;
-      background-size: 200% 200%;
+      padding: 10px 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     }
 
-    @keyframes gradient {
-      0% { background-position: left; }
-      100% { background-position: right; }
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-    }
-
-    p {
-      max-width: 700px;
-      font-size: 1.1rem;
-      line-height: 1.7;
-      text-shadow: 0 1px 6px rgba(0,0,0,0.2);
-    }
-
-    .quote {
-      margin-top: 20px;
-      font-style: italic;
-      font-weight: 300;
-      color: #eaf6ff;
-      background: rgba(255,255,255,0.1);
-      padding: 10px 20px;
-      border-radius: 12px;
-      backdrop-filter: blur(6px);
-    }
-
-    .btn {
-      margin-top: 30px;
-      background: white;
-      color: #0077ff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
+    nav a {
+      text-decoration: none;
+      color: #1a1a1a;
+      margin: 0 20px;
       font-weight: 600;
-      transition: 0.3s;
+      transition: color 0.3s;
     }
 
-    .btn:hover {
-      background: #0077ff;
+    nav a:hover {
+      color: #4a90e2;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 900px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .quiz {
+      display: none;
+    }
+
+    button {
+      background: #4a90e2;
       color: white;
-      transform: scale(1.05);
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #357bd8;
     }
 
     footer {
-      position: absolute;
-      bottom: 20px;
-      font-size: 0.9rem;
-      opacity: 0.8;
+      text-align: center;
+      padding: 20px;
+      background: #eef3f9;
+      margin-top: 50px;
+      color: #555;
+    }
+
+    .question {
+      font-size: 1.2em;
+      margin-bottom: 15px;
+    }
+
+    .answer {
+      display: block;
+      margin: 8px 0;
+    }
+
+    .fade {
+      animation: fadeIn 0.6s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <h1>Twoje słowa — Twój ślad</h1>
-  <p>
-    Każde słowo, które wypowiadasz, zostawia po sobie ślad.  
-    W internecie i w życiu codziennym warto pamiętać, że słowa mają moc —  
-    mogą budować albo ranić. Włącz odpowiedzialność i szacunek,  
-    zanim klikniesz „Wyślij”.
-  </p>
+  <header>
+    <h1>Witaj na mojej stronie</h1>
+    <p>Nowoczesna i interaktywna przestrzeń wiedzy 💡</p>
+  </header>
 
-  <div class="quote">
-    „Słowa mogą ranić — ale też leczyć. Wybieraj je tak, by zostawić ślad, z którego można być dumnym.”
-  </div>
+  <nav>
+    <a href="#" onclick="showSection('info')">Informacje</a>
+    <a href="#" onclick="showSection('quiz')">Quiz</a>
+  </nav>
 
-  <button class="btn" onclick="alert('Dziękujemy, że wybierasz odpowiedzialność! ❤️')">Zostaw dobry ślad</button>
+  <section id="info" class="fade">
+    <h2>Odpowiedzialność w sieci 🌐</h2>
+    <p>Internet to potężne narzędzie, które daje ogromne możliwości, ale też wymaga odpowiedzialności.</p>
+    <p>✅ Szanuj prywatność innych. <br>
+       ⚠️ Nie udostępniaj danych osobowych. <br>
+       💬 Zachowuj kulturę w rozmowach online. <br>
+       🔒 Używaj silnych haseł i dwustopniowego uwierzytelniania.</p>
+    <p>Chcesz sprawdzić swoją wiedzę? Kliknij poniżej!</p>
+    <button onclick="showSection('quiz')">Zrób quiz</button>
+  </section>
 
-  <footer>© 2025 Twoje słowa — Twój ślad</footer>
+  <section id="quiz" class="quiz fade">
+    <h2>Quiz: Czy jesteś bezpieczny w sieci? 🔐</h2>
+    <div id="quizContent"></div>
+    <button onclick="startQuiz()">Rozpocznij</button>
+  </section>
+
+  <footer>
+    © 2025 Stworzono przez Ciebie z pomocą AI ✨
+  </footer>
+
+  <script>
+    function showSection(id) {
+      document.getElementById("info").style.display = "none";
+      document.getElementById("quiz").style.display = "none";
+      document.getElementById(id).style.display = "block";
+    }
+
+    const quizData = [
+      {
+        question: "Czy powinieneś udostępniać swoje hasła znajomym?",
+        answers: ["Tak", "Nie"],
+        correct: 1
+      },
+      {
+        question: "Co oznacza HTTPS w adresie strony?",
+        answers: ["Bezpieczne połączenie", "Niezabezpieczona strona"],
+        correct: 0
+      },
+      {
+        question: "Czy można ufać wszystkim linkom z mediów społecznościowych?",
+        answers: ["Tak", "Nie"],
+        correct: 1
+      }
+    ];
+
+    let current = 0;
+    let score = 0;
+
+    function startQuiz() {
+      current = 0;
+      score = 0;
+      showQuestion();
+    }
+
+    function showQuestion() {
+      const quiz = document.getElementById("quizContent");
+      const q = quizData[current];
+      quiz.innerHTML = `
+        <div class="question">${q.question}</div>
+        ${q.answers.map((a, i) => `<button class="answer" onclick="checkAnswer(${i})">${a}</button>`).join("")}
+      `;
+    }
+
+    function checkAnswer(i) {
+      if (i === quizData[current].correct) score++;
+      current++;
+      if (current < quizData.length) {
+        showQuestion();
+      } else {
+        document.getElementById("quizContent").innerHTML =
+          `<h3>Twój wynik: ${score}/${quizData.length}</h3>
+           <button onclick="startQuiz()">Zagraj ponownie</button>`;
+      }
+    }
+
+    // Początkowa sekcja
+    showSection('info');
+  </script>
 </body>
 </html>
-
